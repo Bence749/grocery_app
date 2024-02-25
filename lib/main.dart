@@ -38,7 +38,7 @@ class MainApp extends StatelessWidget
   final int _selectedIndex;
   final Function(int) _onItemTapped;
 
-  final List<Widget> _pages = [HomePage(), ListPage(), HelpPage()];
+  final List<Widget> _pages = [const HomePage(), const ListPage(), const HelpPage()];
 
   MainApp(this._selectedIndex, this._onItemTapped, {super.key});
 
