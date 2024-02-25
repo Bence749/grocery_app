@@ -8,9 +8,7 @@ class HomePage extends StatelessWidget
   Widget build(BuildContext context)
   {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home page"),
-      ),
+      backgroundColor: Color(int.parse('0xFF1b212f')),
     );
   }
 }
