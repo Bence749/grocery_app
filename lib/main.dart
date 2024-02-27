@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/ProfilePage.dart';
 import 'HomePage.dart';
-import 'ListPage.dart';
-import 'HelpPage.dart';
+import 'ScanPage.dart';
+import 'SettingsPage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 void main() => runApp(const MyApp());
 
@@ -50,26 +52,29 @@ class MainApp extends StatelessWidget
   final int _selectedIndex;
   final Function(int) _onItemTapped;
 
-  final List<Widget> _pages = [const HomePage(), const ListPage(), const HelpPage()];
+  final List<Widget> _pages = [const HomePage(), const ListPage(), const SettingsPage(), const ProfilePage()];
 
   MainApp(this._selectedIndex, this._onItemTapped, {super.key});
 
   @override
   Widget build(BuildContext context)
   {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.barcode), label: "Scan product"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
-        ],
-        backgroundColor: Color(int.parse('0xFF3dfbbd')),
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(int.parse('0xFF161a1f')),
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: SalomonBottomBar(
+          items: [
+            SalomonBottomBarItem(icon: const Icon(Icons.home), title: const Text("Home")),
+            SalomonBottomBarItem(icon: const Icon(CupertinoIcons.barcode), title: const Text("Scan product")),
+            SalomonBottomBarItem(icon: const Icon(Icons.settings), title: const Text("Settings")),
+          ],
+          backgroundColor: Color(int.parse('0xFF3dfbbd')),
+          currentIndex: _selectedIndex,
+          selectedItemColor: Color(int.parse('0xFF161a1f')),
+          onTap: _onItemTapped,
+          margin: EdgeInsets.fromLTRB(screenSize.width * 0.20, 0, screenSize.width * 0.20, 0),
+        ),
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +96,9 @@ class MainApp extends StatelessWidget
         actions: <Widget>[
           IconButton(
             icon: const Icon(CupertinoIcons.profile_circled, size: 30,),
-            onPressed: (){},
+            onPressed: (){
+              _onItemTapped(3);
+            },
           ),
         ],
         leading: IconButton(
