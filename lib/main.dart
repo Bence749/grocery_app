@@ -52,7 +52,7 @@ class MainApp extends StatelessWidget
   final int _selectedIndex;
   final Function(int) _onItemTapped;
 
-  final List<Widget> _pages = [const HomePage(), const ListPage(), const SettingsPage(), const ProfilePage()];
+  final List<Widget> _pages = [const HomePage(), const ScanPage(), const SettingsPage(), const ProfilePage()];
 
   MainApp(this._selectedIndex, this._onItemTapped, {super.key});
 
@@ -73,9 +73,10 @@ class MainApp extends StatelessWidget
           currentIndex: _selectedIndex,
           selectedItemColor: Color(int.parse('0xFF161a1f')),
           onTap: _onItemTapped,
-          margin: EdgeInsets.fromLTRB(screenSize.width * 0.20, 0, screenSize.width * 0.20, 0),
+          margin: EdgeInsets.fromLTRB(screenSize.width * 0.10, 0, screenSize.width * 0.10, 0),
         ),
       appBar: AppBar(
+        backgroundColor: Color(int.parse('0xFF1b212f')),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -96,15 +97,19 @@ class MainApp extends StatelessWidget
         actions: <Widget>[
           IconButton(
             icon: const Icon(CupertinoIcons.profile_circled, size: 30,),
+            color: Color(int.parse('0xFF3dfbbd')),
             onPressed: (){
               _onItemTapped(3);
             },
           ),
         ],
         leading: IconButton(
-          icon: const Icon(CupertinoIcons.arrow_left),
-          onPressed: (){},
+          icon: const Icon(
+          CupertinoIcons.arrow_left,
+          color: Colors.white, // Set the color to white
         ),
+  onPressed: (){},
+),
       ),
     );
   }
