@@ -4,6 +4,7 @@ import 'package:barcode_scan2/barcode_scan2.dart.';
 import 'package:barcode_scan2/gen/protos/protos.pb.dart';
 import 'package:barcode_scan2/gen/protos/protos.pbserver.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
@@ -48,11 +49,11 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   Future<void> startScanning() async{
-    const Duration scanInterval = Duration(seconds: 1);
+    const Duration scanInterval = Duration(seconds: 5);
     BuildContext dialogContext;
     BarcodeScanner scanner;
 
-    Timer.periodic(scanInterval, (Timer timer) async {
+    /*Timer.periodic(scanInterval, (Timer timer) async {
       if(!_isCameraInitialized) return;
 
       try {
@@ -65,7 +66,7 @@ class _ScanPageState extends State<ScanPage> {
           result = "UnkownError: $e";
         });
       }
-    });
+    });*/
   }
 
   @override
@@ -86,12 +87,13 @@ class _ScanPageState extends State<ScanPage> {
                   ? ClipRRect(
                 clipBehavior: Clip.hardEdge,
                 borderRadius: BorderRadius.circular(20),
-                child: SizedBox.expand(
-                  child: Transform.flip(
-                      flipX: true,
-                      child: CameraPreview(_controller)),
+                child: OverflowBox(
+                  alignment: Alignment.center,
+                  fit: OverflowBoxFit.max,
+                  minHeight: 200,
+                  maxHeight: double.infinity,
+                  child: CameraPreview(_controller)),
                     )
-                  )
                   : Container(
                       decoration: BoxDecoration(
                         color: Color(int.parse('0xFF161a1f')),
@@ -103,12 +105,6 @@ class _ScanPageState extends State<ScanPage> {
                         ),
                       ),
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                ),
-                child: Text(result),
-              )
             ],
           ),
         ),
