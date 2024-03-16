@@ -1,6 +1,7 @@
 class Ingredient {
   final int id;
   final String name;
+
   final bool isVegan;
   final bool isVegetarian;
   final bool isHalal;
@@ -27,34 +28,36 @@ class Ingredient {
   Ingredient({
     required this.id,
     required this.name,
-    required this.isVegan,
-    required this.isVegetarian,
-    required this.isHalal,
-    required this.isKosher,
-    required this.isGlutenFree,
-    required this.isLactoseFree,
-    required this.isNutFree,
-    required this.isSoyFree,
-    required this.isEggFree,
-    required this.isShellfishFree,
-    required this.isPeanutFree,
-    required this.isWheatFree,
-    required this.isFishFree,
-    required this.isDairyFree,
-    required this.isSesameFree,
-    required this.isCeleryFree,
-    required this.isMustardFree,
-    required this.isLupinFree,
-    required this.isMolluscFree,
-    required this.isAlcoholFree,
-    required this.isCaffeineFree,
-    required this.isSugarFree,
+
+    this.isVegan = false,
+    this.isVegetarian = false,
+    this.isHalal = false,
+    this.isKosher = false,
+    this.isGlutenFree = false,
+    this.isLactoseFree = false,
+    this.isNutFree = false,
+    this.isSoyFree = false,
+    this.isEggFree = false,
+    this.isShellfishFree = false,
+    this.isPeanutFree = false,
+    this.isWheatFree = false,
+    this.isFishFree = false,
+    this.isDairyFree = false,
+    this.isSesameFree = false,
+    this.isCeleryFree = false,
+    this.isMustardFree = false,
+    this.isLupinFree = false,
+    this.isMolluscFree = false,
+    this.isAlcoholFree = false,
+    this.isCaffeineFree = false,
+    this.isSugarFree = false,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
+
       'isVegan': isVegan,
       'isVegetarian': isVegetarian,
       'isHalal': isHalal,

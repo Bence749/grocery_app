@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import '../models/ProductModel.dart';
 import '../models/IngredientModel.dart';
 
-class DatabaseHelper {
+class DatabaseHandler {
   static const int _version = 1;
   static const String _dbName = "Products.db";
 
@@ -36,6 +36,7 @@ class DatabaseHelper {
       return Ingredient(
         id: map['id'],
         name: map['name'],
+
         isVegan: map['isVegan'],
         isVegetarian: map['isVegetarian'],
         isHalal: map['isHalal'],

@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/ProfilePage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common/sqlite_api.dart';
+
 import 'HomePage.dart';
 import 'ScanPage.dart';
 import 'SettingsPage.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'services/DatabaseHandler.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
+  final Database db = await DatabaseHandler.getDB();
+
+
+
+  runApp(const MyApp());
+}
+
 
 class MyApp extends StatefulWidget
 {

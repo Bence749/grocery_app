@@ -1,73 +1,74 @@
-import 'package:faker/faker.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../models/ProductModel.dart';
 import '../models/IngredientModel.dart';
-import 'DatabaseHandler.dart';
+import '../models/ProductModel.dart';
+import '../services/DatabaseHandler.dart';
 
-Future<void> main() async {
-  final Database db = await DatabaseHelper.getDB();
-  final faker = Faker();
+Future<void> seedDatabase() async {
+  final Database db = await DatabaseHandler.getDB();
 
-  // Generate and insert fake ingredients
-  final List<Ingredient> ingredients = List.generate(10, (index) {
+  // Manual list of ingredient names
+  final List<String> ingredientNames = [
+    'Chocolate',
+    'Sugar',
+    'Milk',
+    'Wheat Flour',
+    'Egg',
+    'Nut',
+  ];
+
+  // Generate and insert ingredients
+  final List<Ingredient> ingredients = [];
+  for (var index = 0; index < ingredientNames.length; index++) {
     final ingredient = Ingredient(
       id: index + 1,
-      name: faker.food.cuisine(),
-      isVegan: random.boolean(),
-      isVegetarian: random.boolean(),
-      isHalal: random.boolean(),
-      isKosher: random.boolean(),
-      isGlutenFree: random.boolean(),
-      isLactoseFree: random.boolean(),
-      isNutFree: random.boolean(),
-      isSoyFree: random.boolean(),
-      isEggFree: random.boolean(),
-      isShellfishFree: random.boolean(),
-      isPeanutFree: random.boolean(),
-      isWheatFree: random.boolean(),
-      isFishFree: random.boolean(),
-      isDairyFree: random.boolean(),
-      isSesameFree: random.boolean(),
-      isCeleryFree: random.boolean(),
-      isMustardFree: random.boolean(),
-      isLupinFree: random.boolean(),
-      isMolluscFree: random.boolean(),
-      isAlcoholFree: random.boolean(),
-      isCaffeineFree: random.boolean(),
-      isSugarFree: random.boolean(),
+      name: ingredientNames[index],
+      isSugarFree: ingredientNames[index] != 'Sugar',
+      isLactoseFree: ingredientNames[index] != 'Milk',
+      isNutFree: ingredientNames[index] != 'Nut',
+      isWheatFree: ingredientNames[index] != 'Wheat Flour',
+      isEggFree: ingredientNames[index] != 'Egg',
     );
-    db.insert('ingredients', ingredient.toJson());
-    return ingredient;
-  });
+    await db.insert('ingredients', ingredient.toJson());
+    ingredients.add(ingredient);
+  }
 
+  // Manual list of product details
+  final List<Map<String, dynamic>> productsData = [
+    {
+      'name': 'Milka Choco Wafer Single wafer filled with cocoa filling 30 g',
+      'description':
+          'Wafer filled with cocoa cream and coated with alpine milk chocolate. Place of origin: EU',
+      'ingredientIndexes': [0, 1, 2, 3, 4, 5],
+    },
+    {
+      'name':
+          'Nestea peach flavored tea soft drink with sugar and sweetener 0.5 l',
+      'description':
+          'Low in energy, without the addition of preservatives or dyes',
+      'ingredientIndexes': [1],
+    },
+  ];
 
-  // Generate and insert fake products
-  List<Product> products = List.generate(10, (index) {
-    List<Ingredient> productIngredients = [];
-    // Randomly assign 1-5 ingredients to each product
-    for (var i = 0; i < faker.randomGenerator.integer(5); i++) {
-      productIngredients.add(ingredients[faker.randomGenerator.integer(10)]);
+  // Generate and insert products
+  List<Product> products = [];
+  for (var index = 0; index < productsData.length; index++) {
+    final productData = productsData[index];
+    final List<Ingredient> productIngredients = [];
+
+    // Extract ingredients for this product
+    for (final ingredientIndex in productData['ingredientIndexes']) {
+      productIngredients.add(ingredients[ingredientIndex]);
     }
+
     final product = Product(
       id: index + 1,
-      name: faker.food.dish(),
-      description: faker.lorem.sentence(),
+      name: productData['name'],
+      description: productData['description'],
       ingredients: productIngredients,
     );
-    db.insert('products', product.toJson());
-    return product;
-  });
-
-  products = await DatabaseHelper.getProducts();
-  for (var product in products) {
-    print('Product: ${product.name}');
-    print('Description: ${product.description}');
-    print('Ingredients:');
-    product.ingredients.forEach((ingredient) {
-      print('- ${ingredient.name}');
-    });
-    print('----------------------');
+    await db.insert('products', product.toJson());
+    products.add(product);
   }
 
   await db.close();
