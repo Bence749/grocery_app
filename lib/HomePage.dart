@@ -1,10 +1,8 @@
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:grocery_app/mysql.dart';
-
-import 'models/ProductModel.dart';
-import 'services/DatabaseHandler.dart';
+import 'package:grocery_app/ApiClient.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,21 +13,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
 {
-  var db = new MySql();
+  var api = new ApiClient();
   var name = '';
 
-  void _getUsers() async {
-    name = '';
-    var conn = await db.getConnection();
-    var results = await conn.query('SELECT * FROM users');
-    for (var row in results) {
-      name = name + row[1] + ' ';
-    }
-
+  Future<void> _getUsers() async {
     setState(() {
-      name = name;
+      name = '';
     });
-    await conn.close();
+
+    try {
+      var response = await api.getRequest('products');
+      if (response.statusCode == 200) {
+        // Successfully fetched users
+        var users = json.decode(response.body);
+        setState(() {
+          for (var user in users) {
+            name += user['name'] + ' ';
+          }
+        });
+      } else {
+        // Error handling
+        print('Failed to fetch users: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Exception handling
+      print('Exception while fetching users: $e');
+    }
   }
 
   @override

@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/ProfilePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:mysql1/mysql1.dart';
 
 import 'HomePage.dart';
 import 'ScanPage.dart';
 import 'SettingsPage.dart';
-import 'services/DatabaseHandler.dart';
 
 void main() async {
   runApp(const MyApp());
 }
 
-
-class MyApp extends StatefulWidget
-{
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
