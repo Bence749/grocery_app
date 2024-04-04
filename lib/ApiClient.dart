@@ -22,27 +22,3 @@ class ApiClient {
   }
 
 }
-/*
-class MySql {
-  static String _host = '185.111.89.207';
-  static String _user = 'adamdien_grocery';
-  static String _pass = "reparetekmogyoro";
-  static String _db = 'adamdien_grocery';
-  static int _port = 3306;
-
-  MySql();
-
-  Future<MySqlConnection> getConnection() async {
-    var settings = new ConnectionSettings(
-      host: _host,
-      port: _port,
-      user: _user,
-      password: _pass,
-      db: _db,
-    );
-
-    MySqlConnection connection = await MySqlConnection.connect(settings);
-    return connection;
-  }
-}
- */
