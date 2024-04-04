@@ -10,8 +10,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-{
+class _HomePageState extends State<HomePage> {
   var api = new ApiClient();
   var name = '';
 
@@ -23,7 +22,6 @@ class _HomePageState extends State<HomePage>
     try {
       var response = await api.getRequest('products');
       if (response.statusCode == 200) {
-        // Successfully fetched users
         var users = json.decode(response.body);
         setState(() {
           for (var user in users) {
@@ -31,11 +29,9 @@ class _HomePageState extends State<HomePage>
           }
         });
       } else {
-        // Error handling
         print('Failed to fetch users: ${response.statusCode}');
       }
     } catch (e) {
-      // Exception handling
       print('Exception while fetching users: $e');
     }
   }
@@ -43,22 +39,23 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(int.parse('0xFF1b212f')),
-      appBar: AppBar(
-        title: Text('Products'),
-      ),
-      body: Center(
-        child: Column(
+        backgroundColor: Color(int.parse('0xFF1b212f')),
+        appBar: AppBar(
+          title: Text('Products'),
+        ),
+        body: Center(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
               onPressed: _getUsers,
-              child: Text('Get Users'),
+              child: Text('Get all products'),
             ),
-            Text('$name', style: TextStyle(color: Colors.red),),
+            Text(
+              '$name',
+              style: TextStyle(color: Colors.red),
+            ),
           ],
-        )
-      )
-    );
+        )));
   }
 }

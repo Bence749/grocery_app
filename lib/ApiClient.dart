@@ -1,7 +1,8 @@
 import 'package:http/http.dart' as http;
 
 class ApiClient {
-  static String _baseUrl = 'http://localhost:3000';
+  static String _baseUrl =
+      'https://grocery-app-server-8o3xk.ondigitalocean.app';
   static String _bearerToken = '123456';
 
   ApiClient();
@@ -20,5 +21,4 @@ class ApiClient {
       return http.Response('Error: $e', 500);
     }
   }
-
 }
