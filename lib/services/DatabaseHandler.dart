@@ -1,5 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/material.dart';
 
 import '../models/ProductModel.dart';
 import '../models/IngredientModel.dart';
@@ -9,6 +10,7 @@ class DatabaseHandler {
   static const String _dbName = "Products.db";
 
   static Future<Database> getDB() async {
+    print("Opening database" + _dbName);
     return openDatabase(join(await getDatabasesPath(), _dbName),
         onCreate: (db, version) async {
       await db.execute(

@@ -1,10 +1,36 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:grocery_app/mysql.dart';
 
 import 'models/ProductModel.dart';
 import 'services/DatabaseHandler.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+{
+  var db = new MySql();
+  var name = '';
+
+  void _getUsers() async {
+    name = '';
+    var conn = await db.getConnection();
+    var results = await conn.query('SELECT * FROM users');
+    for (var row in results) {
+      name = name + row[1] + ' ';
+    }
+
+    setState(() {
+      name = name;
+    });
+    await conn.close();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,41 +39,18 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Products'),
       ),
-      body: FutureBuilder<List<Product>>(
-        future: DatabaseHandler.getProducts(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else {
-            List<Product>? products = snapshot.data;
-            if (products == null || products.isEmpty) {
-              return const Center(
-                child: Text('No products available'),
-              );
-            } else {
-              return ListView.builder(
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  Product product = products[index];
-                  return ListTile(
-                    title: Text(product.name),
-                    subtitle: Text(product.description),
-                    onTap: () {
-                      // Handle tap on product if needed
-                    },
-                  );
-                },
-              );
-            }
-          }
-        },
-      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: _getUsers,
+              child: Text('Get Users'),
+            ),
+            Text('$name', style: TextStyle(color: Colors.red),),
+          ],
+        )
+      )
     );
   }
 }

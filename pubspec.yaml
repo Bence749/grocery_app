@@ -37,7 +37,10 @@ dependencies:
   barcode_scan2: ^4.3.0
   sqflite: ^2.3.2
   path: ^1.9.0
-  sqflite_common_ffi: ^2.3.2+1
+  sqflite_common_ffi: ^2.0.0+3
+  sqflite_common_ffi_web: ^0.4.3
+  mysql1: ^0.20.0
+  flutter_dotenv: ^5.1.0
 
 devdependencies:
   flutter_test:
@@ -49,6 +52,10 @@ devdependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
+
+assets:
+  - .env
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
