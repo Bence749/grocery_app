@@ -1,5 +1,3 @@
-import 'package:mysql1/mysql1.dart';
-
 import 'package:http/http.dart' as http;
 
 class ApiClient {
