@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 class ApiClient {
   static String _baseUrl =
       'https://grocery-app-server-8o3xk.ondigitalocean.app';
-  static String _bearerToken = '123456';
+  static String _bearerToken = '9sOlQBvayE';
 
   ApiClient();
 
