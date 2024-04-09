@@ -41,6 +41,8 @@ dependencies:
   sqflite_common_ffi_web: ^0.4.3
   mysql1: ^0.20.0
   flutter_dotenv: ^5.1.0
+  flutter_svg: ^2.0.10+1
+  shared_preferences: ^2.2.2
 
 devdependencies:
   flutter_test:
@@ -55,6 +57,7 @@ devdependencies:
 
 assets:
   - .env
+  - assets/icons/user-profile-icon.svg
 
 
 # For information on the generic Dart part of this file, see the

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:grocery_app/ApiClient.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,6 +37,19 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  bool toggle1 = false;
+  bool toggle2 = false;
+  bool toggle3 = false;
+
+  Future<void> loadToggleValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      toggle1 = prefs.getBool('toggle1') ?? false;
+      toggle2 = prefs.getBool('toggle2') ?? false;
+      toggle3 = prefs.getBool('toggle3') ?? false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +69,7 @@ class _HomePageState extends State<HomePage> {
               '$name',
               style: TextStyle(color: Colors.red),
             ),
+            Text('$toggle1', style: TextStyle(color: Colors.red),)
           ],
         )));
   }

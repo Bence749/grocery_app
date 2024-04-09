@@ -89,7 +89,6 @@ class _ScanPageState extends State<ScanPage> {
                 borderRadius: BorderRadius.circular(20),
                 child: OverflowBox(
                   alignment: Alignment.center,
-                  fit: OverflowBoxFit.max,
                   minHeight: 200,
                   maxHeight: double.infinity,
                   child: CameraPreview(_controller)),

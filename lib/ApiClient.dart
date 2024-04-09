@@ -17,7 +17,7 @@ class ApiClient {
       );
       return response;
     } catch (e) {
-      print('Error: $e');
+      print('API error: $e');
       return http.Response('Error: $e', 500);
     }
   }
