@@ -35,7 +35,6 @@ dependencies:
   salomon_bottom_bar: ^3.3.2
   camera: ^0.10.5+9
   barcode_scan2: ^4.3.0
-  mobile_scanner: ^4.0.1
   sqflite: ^2.3.2
   path: ^1.9.0
   sqflite_common_ffi: ^2.0.0+3
