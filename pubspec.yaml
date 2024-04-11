@@ -33,9 +33,6 @@ dependencies:
   simple_barcode_scanner: ^0.1.0
   cupertino_icons: ^1.0.2
   salomon_bottom_bar: ^3.3.2
-  camera: ^0.10.5+9
-  barcode_scan2: ^4.3.0
-  mobile_scanner: ^4.0.1
   sqflite: ^2.3.2
   path: ^1.9.0
   sqflite_common_ffi: ^2.0.0+3
@@ -44,6 +41,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_svg: ^2.0.10+1
   shared_preferences: ^2.2.2
+  mobile_scanner: ^4.0.1
 
 devdependencies:
   flutter_test:

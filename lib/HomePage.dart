@@ -69,7 +69,10 @@ class _HomePageState extends State<HomePage> {
               '$name',
               style: TextStyle(color: Colors.red),
             ),
-            Text('$toggle1', style: TextStyle(color: Colors.red),)
+            Text(
+              '$toggle1',
+              style: TextStyle(color: Colors.red),
+            )
           ],
         )));
   }

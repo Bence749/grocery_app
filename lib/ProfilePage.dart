@@ -15,8 +15,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool toggle3 = false;
 
   @override
-  void initState()
-  {
+  void initState() {
     super.initState();
     loadToggleValues();
   }
@@ -38,8 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(int.parse('0xFF1b212f')),
       body: Stack(
@@ -55,7 +53,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Color(int.parse('0xFF3dfbbd')),
                 ),
                 SwitchListTile(
-                  title: const Text('Toggle 1', style: TextStyle(color: Colors.white),),
+                  title: const Text(
+                    'Toggle 1',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   value: toggle1,
                   onChanged: (bool value) {
                     setState(() {
@@ -65,7 +66,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 SwitchListTile(
-                  title: const Text('Toggle 2', style: TextStyle(color: Colors.white),),
+                  title: const Text(
+                    'Toggle 2',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   value: toggle2,
                   onChanged: (bool value) {
                     setState(() {
@@ -75,7 +79,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 SwitchListTile(
-                  title: const Text('Toggle 3', style: TextStyle(color: Colors.white),),
+                  title: const Text(
+                    'Toggle 3',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   value: toggle3,
                   onChanged: (bool value) {
                     setState(() {

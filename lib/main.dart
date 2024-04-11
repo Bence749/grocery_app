@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/ProfilePage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'HomePage.dart';

@@ -17,54 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
-  barcode_scan2:
-    dependency: "direct main"
-    description:
-      name: barcode_scan2
-      sha256: "847ff88888213a3b2866d98839ee6d85e4da8002df83e7971d355d24d5f31c4c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.3.0"
-  camera:
-    dependency: "direct main"
-    description:
-      name: camera
-      sha256: "9499cbc2e51d8eb0beadc158b288380037618ce4e30c9acbc4fae1ac3ecb5797"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.5+9"
-  camera_android:
-    dependency: transitive
-    description:
-      name: camera_android
-      sha256: "1100e527b44a96906987a91ef78c8dacb539e34612a8058de89023380acf67f1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.8+18"
-  camera_avfoundation:
-    dependency: transitive
-    description:
-      name: camera_avfoundation
-      sha256: "841682a28b99b8594532d2afe81e092a2c1edb2c93526f6f841a878dd57eec8d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.14+2"
-  camera_platform_interface:
-    dependency: transitive
-    description:
-      name: camera_platform_interface
-      sha256: a250314a48ea337b35909a4c9d5416a208d736dcb01d0b02c6af122be66660b0
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.7.4"
-  camera_web:
-    dependency: transitive
-    description:
-      name: camera_web
-      sha256: f18ccfb33b2a7c49a52ad5aa3f07330b7422faaecbdfd9b9fe8e51182f6ad67d
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.2+4"
   characters:
     dependency: transitive
     description:
@@ -81,14 +33,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  cross_file:
-    dependency: transitive
-    description:
-      name: cross_file
-      sha256: "55d7b444feb71301ef6b8838dbc1ae02e63dd48c8773f3810ff53bb1e2945b32"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.4+1"
   crypto:
     dependency: transitive
     description:
@@ -129,14 +73,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
-  fixnum:
-    dependency: transitive
-    description:
-      name: fixnum
-      sha256: "25517a4deb0c03aa0f32fd12db525856438902d9c16536311e76cdc57b31d7d1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -162,10 +98,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_plugin_android_lifecycle
-      sha256: b068ffc46f82a55844acfa4fdbb61fad72fa2aef0905548419d97f0f95c456da
+      sha256: "592dc01a18961a51c24ae5d963b724b2b7fa4a95c100fe8eb6ca8a5a4732cadf"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.17"
+    version: "2.0.18"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -227,6 +163,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  mobile_scanner:
+    dependency: "direct main"
+    description:
+      name: mobile_scanner
+      sha256: "827765afbd4792ff3fd105ad593821ac0f6d8a7d352689013b07ee85be336312"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
   mysql1:
     dependency: "direct main"
     description:
@@ -363,14 +307,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.14.2"
-  protobuf:
-    dependency: transitive
-    description:
-      name: protobuf
-      sha256: "68645b24e0716782e58948f8467fd42a880f255096a821f9e7d0ec625b00c84d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.0"
   pub_semver:
     dependency: transitive
     description:
@@ -492,10 +428,10 @@ packages:
     dependency: "direct main"
     description:
       name: sqflite_common_ffi_web
-      sha256: "323e6db355c9eac7d3d834e35be339cedbd04f43ef5bcef4e8158bd290c2a94e"
+      sha256: cfc9d1c61a3e06e5b2e96994a44b11125b4f451fee95b9fad8bd473b4613d592
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.3"
+    version: "0.4.3+1"
   sqlite3:
     dependency: transitive
     description:
@@ -512,14 +448,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
-  stream_transform:
-    dependency: transitive
-    description:
-      name: stream_transform
-      sha256: "14a00e794c7c11aa145a170587321aedce29769c08d7f58b1d141da75e3b1c6f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   string_scanner:
     dependency: transitive
     description:
