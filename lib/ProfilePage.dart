@@ -10,9 +10,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool toggle1 = false;
-  bool toggle2 = false;
-  bool toggle3 = false;
+  bool userVegan = false;
+  bool userVegetarian = false;
+  bool userHalal = false;
 
   @override
   void initState() {
@@ -22,17 +22,17 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> saveToggleValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('toggle1', toggle1);
-    await prefs.setBool('toggle2', toggle2);
-    await prefs.setBool('toggle3', toggle3);
+    await prefs.setBool('userVegan', userVegan);
+    await prefs.setBool('userVegetarian', userVegetarian);
+    await prefs.setBool('userHalal', userHalal);
   }
 
   Future<void> loadToggleValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      toggle1 = prefs.getBool('toggle1') ?? false;
-      toggle2 = prefs.getBool('toggle2') ?? false;
-      toggle3 = prefs.getBool('toggle3') ?? false;
+      userVegan = prefs.getBool('userVegan') ?? false;
+      userVegetarian = prefs.getBool('userVegetarian') ?? false;
+      userHalal = prefs.getBool('userHalal') ?? false;
     });
   }
 
@@ -53,40 +53,43 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Color(int.parse('0xFF3dfbbd')),
                 ),
                 SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
                   title: const Text(
-                    'Toggle 1',
+                    'Vegan',
                     style: TextStyle(color: Colors.white),
                   ),
-                  value: toggle1,
+                  value: userVegan,
                   onChanged: (bool value) {
                     setState(() {
-                      toggle1 = value;
+                      userVegan = value;
                     });
                     saveToggleValues();
                   },
                 ),
                 SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
                   title: const Text(
-                    'Toggle 2',
+                    'Vegetarian',
                     style: TextStyle(color: Colors.white),
                   ),
-                  value: toggle2,
+                  value: userVegetarian,
                   onChanged: (bool value) {
                     setState(() {
-                      toggle2 = value;
+                      userVegetarian = value;
                     });
                     saveToggleValues();
                   },
                 ),
                 SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
                   title: const Text(
-                    'Toggle 3',
+                    'Halal',
                     style: TextStyle(color: Colors.white),
                   ),
-                  value: toggle3,
+                  value: userHalal,
                   onChanged: (bool value) {
                     setState(() {
-                      toggle3 = value;
+                      userHalal = value;
                     });
                     saveToggleValues();
                   },

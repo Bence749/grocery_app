@@ -44,6 +44,7 @@ dependencies:
   mobile_scanner: ^4.0.1
 
   http: any
+  accordion: ^2.6.0
 devdependencies:
   flutter_test:
     sdk: flutter
