@@ -43,6 +43,7 @@ dependencies:
   shared_preferences: ^2.2.2
   mobile_scanner: ^4.0.1
 
+  http: any
 devdependencies:
   flutter_test:
     sdk: flutter
