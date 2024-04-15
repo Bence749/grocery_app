@@ -52,25 +52,63 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
         backgroundColor: Color(int.parse('0xFF1b212f')),
-        appBar: AppBar(
-          title: Text('Products'),
-        ),
         body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: 
+          <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(screenSize.width * 0.1, 20, screenSize.width * 0.1, 0,),
+              child: Text('Welcome!',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 36, color: Colors.white)
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(screenSize.width * 0.1, 10, screenSize.width * 0.1, 0,),
+              child: Text('GroceryScan makes grocery shopping fun even with food allergies or specific dietary preferences!',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: Color(0xFF39EBB1))
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(screenSize.width * 0.1, 10, screenSize.width * 0.1, 0,),
+              child: Text('All you have to do is \n1. Set your dietary preferences in your profile\n2. Scan barcode of items in grocery stores!',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: Colors.white)
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(screenSize.width * 0.1, 10, screenSize.width * 0.1, 0,),
+              child: Text('GroceryScan will tell you if you can consume the scanned product or not based on your preferences. \nEnjoy your shopping!',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: Color(0xFF39EBB1))
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0,0,0,0),
+              child: Image.asset('images/grocery_logo.jpg', height: screenSize.height * 0.3),
+            ),
+            /*
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0,),
+              child: ElevatedButton(
               onPressed: _getUsers,
               child: Text('Get all products'),
+              ),
             ),
             Text(
               '$name',
               style: TextStyle(color: Colors.red),
             ),
             Text('$toggle1', style: TextStyle(color: Colors.red),)
+            */
           ],
+
         )));
   }
 }

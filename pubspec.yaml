@@ -59,6 +59,9 @@ devdependencies:
 assets:
   - .env
   - assets/icons/user-profile-icon.svg
+  - images/grocery_logo.jpg
+  - assetes/images/grocery_logo.jpg
+
 
 
 # For information on the generic Dart part of this file, see the
