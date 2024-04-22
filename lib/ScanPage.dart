@@ -22,6 +22,12 @@ class _ScanPageState extends State<ScanPage> {
   var api = new ApiClient();
 
   @override
+  void initState() {
+    super.initState();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(int.parse('0xFF1b212f')),
@@ -196,150 +202,162 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                     header:  Text("Ingredients", style: TextStyle(color: Colors.white)),
                     content: Text(getIngredients(), style: TextStyle(color: Colors.white))
                   ),
-                ],
-              ),
-              Table(
-                children: [
-                  TableRow(
-                    children: [
-                      TableCell(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Vegan", style: TextStyle(color: Colors.white, fontSize: 14)),
-                            SizedBox(width: 8),
-                            Container(
-                              width: 10,
-                              height: 10,
-                               decoration: BoxDecoration(
-                                 shape: BoxShape.circle,
-                                 color: widget.product["isVegan"] == 1 ? Colors.green : Colors.red,
-                               ),
-                            )
-                          ],
+                  AccordionSection(
+                    headerBorderWidth: 2,
+                    headerBorderColor: Color(0xFF39EBB1),
+                    headerBackgroundColor: Color(0xFF1b212f),
+                    headerBackgroundColorOpened: Color(0xFF39EBB1),
+                    contentBackgroundColor: Color(0xFF1b212f),
+                    contentBorderColor: Color(0xFF39EBB1),
+                    contentBorderWidth: 2,
+                    headerPadding: EdgeInsets.all(8),
+                    header:  Text("Nutritional Information", style: TextStyle(color: Colors.white)),
+                    content:
+                    Table(
+                      children: [
+                        TableRow(
+                            children: [
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Vegan", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isVegan"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Gluten", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isGlutenFree"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ]
                         ),
+                        TableRow(
+                            children: [
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Dairy", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isDiaryFree"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Nuts", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isNutFree"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ]
+                        ),
+                        TableRow(
+                            children: [
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Vegetarian", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isVegetarian"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Halal", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isHalal"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ]
+                        ),
+                        TableRow(
+                            children: [
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Kosher", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isKosher"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              TableCell(
+                                child: Container(
+                                  width: 0,
+                                ),
+                              ),
+                            ]
+                        )
+                      ],
                     ),
-                    TableCell(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Gluten", style: TextStyle(color: Colors.white, fontSize: 14)),
-                          SizedBox(width: 8),
-                          Container(
-                            width: 10,
-                            height: 10,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: widget.product["isGlutenFree"] == 1 ? Colors.green : Colors.red,
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                    ]
                   ),
-                  TableRow(
-                      children: [
-                        TableCell(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Dairy", style: TextStyle(color: Colors.white, fontSize: 14)),
-                              SizedBox(width: 8),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: widget.product["isDiaryFree"] == 1 ? Colors.green : Colors.red,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        TableCell(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Nuts", style: TextStyle(color: Colors.white, fontSize: 14)),
-                              SizedBox(width: 8),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: widget.product["isNutFree"] == 1 ? Colors.green : Colors.red,
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ]
-                  ),
-                  TableRow(
-                      children: [
-                        TableCell(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Vegetarian", style: TextStyle(color: Colors.white, fontSize: 14)),
-                              SizedBox(width: 8),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: widget.product["isVegetarian"] == 1 ? Colors.green : Colors.red,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        TableCell(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Halal", style: TextStyle(color: Colors.white, fontSize: 14)),
-                              SizedBox(width: 8),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: widget.product["isHalal"] == 1 ? Colors.green : Colors.red,
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ]
-                  ),
-                  TableRow(
-                      children: [
-                        TableCell(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Kosher", style: TextStyle(color: Colors.white, fontSize: 14)),
-                              SizedBox(width: 8),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: widget.product["isKosher"] == 1 ? Colors.green : Colors.red,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        TableCell(
-                          child: Container(
-                            width: 0,
-                          ),
-                        ),
-                      ]
-                  )
                 ],
               ),
             ],
