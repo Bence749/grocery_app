@@ -35,7 +35,6 @@ dependencies:
   salomon_bottom_bar: ^3.3.2
   camera: ^0.10.5+9
   barcode_scan2: ^4.3.0
-  mobile_scanner: ^4.0.1
   sqflite: ^2.3.2
   path: ^1.9.0
   sqflite_common_ffi: ^2.0.0+3
@@ -56,20 +55,15 @@ devdependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
 
-assets:
-  - .env
-  - assets/icons/user-profile-icon.svg
-  - images/grocery_logo.jpg
-  - assetes/images/grocery_logo.jpg
-
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets:
+    - .env
+    - assets/images/grocery_logo.jpg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

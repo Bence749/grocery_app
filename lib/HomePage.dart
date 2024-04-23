@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(0,0,0,0),
-              child: Image.asset('images/grocery_logo.jpg', height: screenSize.height * 0.3),
+              child: Image.asset('assets/images/grocery_logo.jpg', height: screenSize.height * 0.3),
             ),
             /*
             Padding(

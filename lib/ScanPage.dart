@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:barcode_scan2/barcode_scan2.dart.';
+
 import 'package:barcode_scan2/gen/protos/protos.pb.dart';
 import 'package:barcode_scan2/gen/protos/protos.pbserver.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({Key? key}) : super(key: key);
@@ -88,16 +87,7 @@ class _ScanPageState extends State<ScanPage> {
                   ? ClipRRect(
                 clipBehavior: Clip.hardEdge,
                 borderRadius: BorderRadius.circular(20),
-                child: MobileScanner(
-                    fit: BoxFit.contain,
-                    onDetect: (capture) {
-                      final List<Barcode> barcodes = capture.barcodes;
-                      final Uint8List? image = capture.image;
-                      for (final barcode in barcodes) {
-                        debugPrint('Barcode found! ${barcode.rawValue}');
-                          }
-                        },
-                      )
+                child: Column()
                     )
                   : Container(
                       decoration: BoxDecoration(
