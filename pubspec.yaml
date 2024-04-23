@@ -56,17 +56,15 @@ devdependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
 
-assets:
-  - .env
-  - assets/icons/user-profile-icon.svg
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets:
+    - .env
+    - assets/images/grocery_logo.jpg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
