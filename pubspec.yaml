@@ -30,14 +30,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  simple_barcode_scanner: ^0.1.0
   cupertino_icons: ^1.0.2
   salomon_bottom_bar: ^3.3.2
+  sqflite: ^2.3.2
+  path: ^1.9.0
+  sqflite_common_ffi: ^2.0.0+3
+  sqflite_common_ffi_web: ^0.4.3
+  mysql1: ^0.20.0
+  flutter_dotenv: ^5.1.0
+  flutter_svg: ^2.0.10+1
+  shared_preferences: ^2.2.2
+  mobile_scanner: ^4.0.1
 
-dev_dependencies:
+  http: any
+  accordion: ^2.6.0
+devdependencies:
   flutter_test:
     sdk: flutter
 
@@ -46,7 +54,12 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
+
+assets:
+  - .env
+  - assets/icons/user-profile-icon.svg
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

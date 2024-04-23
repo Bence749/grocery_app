@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SettingsPage extends StatelessWidget
-{
+class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(int.parse('0xFF1b212f')),
-
     );
   }
 }
