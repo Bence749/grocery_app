@@ -29,17 +29,19 @@ class _ScanPageState extends State<ScanPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Color(int.parse('0xFF1b212f')),
       body: Align(
         alignment: Alignment.center,
-        child: Container(
+        child: Stack(
+          children: [Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.white),
             ),
-            width: 400,
-            height: 200,
+            width: screenSize.width * 0.95,
+            height: screenSize.height * 0.25,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: MobileScanner(
@@ -47,6 +49,81 @@ class _ScanPageState extends State<ScanPage> {
                 controller: cameraController,
                 onDetect: _foundBarcode,
             ))),
+            Positioned(
+              top: screenSize.height * 0.25 / 2 - 10,
+              left: 0,
+              right: 0,
+              child: Divider(
+                color: Color(0xFF39EBB1).withOpacity(0.5),
+                thickness: 10,
+              ),
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(width: 4.0, color: Colors.white),
+                    left: BorderSide(width: 4.0, color: Colors.white),
+                  ),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20)),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(width: 4.0, color: Colors.white),
+                    right: BorderSide(width: 4.0, color: Colors.white),
+                  ),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20)),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 4.0, color: Colors.white),
+                    left: BorderSide(width: 4.0, color: Colors.white),
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20)),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 4.0, color: Colors.white),
+                    right: BorderSide(width: 4.0, color: Colors.white),
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(20)),
+                ),
+              ),
+            ),
+          ],
+        )
       ),
     );
   }
@@ -59,7 +136,7 @@ class _ScanPageState extends State<ScanPage> {
 
       var scanned_product = null;
       try {
-        var response = await api.getRequest('product/1122');
+        var response = await api.getRequest('product/$code');
         if (response.statusCode == 200) {
           var product = json.decode(response.body);
           setState(() {
@@ -77,12 +154,24 @@ class _ScanPageState extends State<ScanPage> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         bool userVegan = prefs.getBool('userVegan') ?? false;
         bool userVegetarian = prefs.getBool('userVegetarian') ?? false;
-        bool userHalal = prefs.getBool('userHalal') ?? false;
+        bool userGlutenFree = prefs.getBool('userGlutenFree') ?? false;
+        bool userDairyFree = prefs.getBool('userDairyFree') ?? false;
+        bool userFishFree = prefs.getBool('userFishFree') ?? false;
+        bool userCrustaceansFree = prefs.getBool('userCrustaceansFree') ?? false;
+        bool userEggFree = prefs.getBool('userEggFree') ?? false;
+        bool userPaleo = prefs.getBool('userPaleo') ?? false;
+        bool userAddedSugarFree = prefs.getBool('userAddedSugarFree') ?? false;
 
         bool isSafe = true;
         isSafe &= !userVegan || (scanned_product["isVegan"] == 1);
         isSafe &= !userVegetarian || (scanned_product["isVegetarian"] == 1);
-        isSafe &= !userHalal || (scanned_product["isHalal"] == 1);
+        isSafe &= !userGlutenFree || (scanned_product["isGlutenFree"] == 1);
+        isSafe &= !userDairyFree || (scanned_product["isDiaryFree"] == 1);
+        isSafe &= !userFishFree || (scanned_product["isFishFree"] == 1);
+        isSafe &= !userCrustaceansFree || (scanned_product["isCrustaceansFree"] == 1);
+        isSafe &= !userEggFree || (scanned_product["isEggFree"] == 1);
+        isSafe &= !userPaleo || (scanned_product["isPaleo"] == 1);
+        isSafe &= !userAddedSugarFree || (scanned_product["isAddedSugarFree"] == 1);
         
         Navigator.push(
             context,
@@ -161,7 +250,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: Image.network(
-                  widget.product["image_url"],
+                  widget.product["image_url"], height: 200,
                 ),
               ),
               SizedBox(
@@ -276,14 +365,14 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Nuts", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Fish", style: TextStyle(color: Colors.white, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
                                       height: 10,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: widget.product["isNutFree"] == 1 ? Colors.green : Colors.red,
+                                        color: widget.product["isFishFree"] == 1 ? Colors.green : Colors.red,
                                       ),
                                     )
                                   ],
@@ -314,14 +403,14 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Halal", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Crustaceans", style: TextStyle(color: Colors.white, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
                                       height: 10,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: widget.product["isHalal"] == 1 ? Colors.green : Colors.red,
+                                        color: widget.product["isCrustaceansFree"] == 1 ? Colors.green : Colors.red,
                                       ),
                                     )
                                   ],
@@ -335,22 +424,63 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Kosher", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Egg", style: TextStyle(color: Colors.white, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
                                       height: 10,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: widget.product["isKosher"] == 1 ? Colors.green : Colors.red,
+                                        color: widget.product["isEggFree"] == 1 ? Colors.green : Colors.red,
                                       ),
                                     )
                                   ],
                                 ),
                               ),
                               TableCell(
-                                child: Container(
-                                  width: 0,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Paleo", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isPaleo"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ]
+                        ),
+                        TableRow(
+                            children: [
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Added Sugar Free", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    SizedBox(width: 8),
+                                    Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: widget.product["isAddedSugarFree"] == 1 ? Colors.green : Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              TableCell(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container()
+                                  ],
                                 ),
                               ),
                             ]

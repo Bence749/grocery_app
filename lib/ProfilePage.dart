@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,7 +13,13 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool userVegan = false;
   bool userVegetarian = false;
-  bool userHalal = false;
+  bool userGlutenFree = false;
+  bool userEggFree = false;
+  bool userFishFree = false;
+  bool userCrustaceansFree = false;
+  bool userDairyFree = false;
+  bool userPaleo = false;
+  bool userAddedSugarFree = false;
 
   @override
   void initState() {
@@ -24,7 +31,13 @@ class _ProfilePageState extends State<ProfilePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('userVegan', userVegan);
     await prefs.setBool('userVegetarian', userVegetarian);
-    await prefs.setBool('userHalal', userHalal);
+    await prefs.setBool('userGlutenFree', userGlutenFree);
+    await prefs.setBool('userEggFree', userEggFree);
+    await prefs.setBool('userFishFree', userFishFree);
+    await prefs.setBool('userCrustaceansFree', userCrustaceansFree);
+    await prefs.setBool('userDairyFree', userDairyFree);
+    await prefs.setBool('userPaleo', userPaleo);
+    await prefs.setBool('userAddedSugarFree', userAddedSugarFree);
   }
 
   Future<void> loadToggleValues() async {
@@ -32,32 +45,50 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       userVegan = prefs.getBool('userVegan') ?? false;
       userVegetarian = prefs.getBool('userVegetarian') ?? false;
-      userHalal = prefs.getBool('userHalal') ?? false;
+      userGlutenFree = prefs.getBool('userGlutenFree') ?? false;
+      userEggFree = prefs.getBool('userEggFree') ?? false;
+      userFishFree = prefs.getBool('userFishFree') ?? false;
+      userCrustaceansFree = prefs.getBool('userCrustaceansFree') ?? false;
+      userDairyFree = prefs.getBool('userDairyFree') ?? false;
+      userPaleo = prefs.getBool('userPaleo') ?? false;
+      userAddedSugarFree = prefs.getBool('userAddedSugarFree') ?? false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Color(int.parse('0xFF1b212f')),
       body: Stack(
         children: [
           Container(
             alignment: Alignment.topCenter,
-            padding: EdgeInsets.only(top: 50),
+            padding: EdgeInsets.only(top: 15),
             child: Column(
               children: [
-                Icon(
-                  CupertinoIcons.profile_circled,
-                  size: 150,
-                  color: Color(int.parse('0xFF3dfbbd')),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: Icon(
+                    CupertinoIcons.profile_circled,
+                    size: 100,
+                    color: Color(int.parse('0xFF3dfbbd')),
+                  ),
                 ),
                 SwitchListTile(
                   activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: const Text(
-                    'Vegan',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Vegan',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.seedling, color: Color(int.parse('0xFF3dfbbd')), size: 25,)
+                    ],),
                   value: userVegan,
                   onChanged: (bool value) {
                     setState(() {
@@ -66,12 +97,26 @@ class _ProfilePageState extends State<ProfilePage> {
                     saveToggleValues();
                   },
                 ),
+                Container(
+                  width: screenSize.width * 0.8,
+                  child: Divider(
+                    color: Color(0xFF3dfbbd),
+                    height: 1,
+                    thickness: 1,
+                  ),),
                 SwitchListTile(
                   activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: const Text(
-                    'Vegetarian',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Vegetarian',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.leaf, color: Color(int.parse('0xFF3dfbbd')), size: 25,)
+                    ],),
                   value: userVegetarian,
                   onChanged: (bool value) {
                     setState(() {
@@ -80,16 +125,198 @@ class _ProfilePageState extends State<ProfilePage> {
                     saveToggleValues();
                   },
                 ),
+                Container(
+                  width: screenSize.width * 0.8,
+                  child: Divider(
+                    color: Color(0xFF3dfbbd),
+                    height: 1,
+                    thickness: 1,
+                ),),
                 SwitchListTile(
                   activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: const Text(
-                    'Halal',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  value: userHalal,
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Paleo',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.drumstickBite, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
+                    ],),
+                  value: userPaleo,
                   onChanged: (bool value) {
                     setState(() {
-                      userHalal = value;
+                      userPaleo = value;
+                    });
+                    saveToggleValues();
+                  },
+                ),
+                Container(
+                  width: screenSize.width * 0.8,
+                  child: Divider(
+                    color: Color(0xFF3dfbbd),
+                    height: 1,
+                    thickness: 1,
+                  ),),
+                SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Gluten Free',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.breadSlice, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
+                    ],),
+                  value: userGlutenFree,
+                  onChanged: (bool value) {
+                    setState(() {
+                      userGlutenFree = value;
+                    });
+                    saveToggleValues();
+                  },
+                ),
+                Container(
+                  width: screenSize.width * 0.8,
+                  child: Divider(
+                    color: Color(0xFF3dfbbd),
+                    height: 1,
+                    thickness: 1,
+                  ),),
+                SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Egg Free',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.egg, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
+                    ],),
+                  value: userEggFree,
+                  onChanged: (bool value) {
+                    setState(() {
+                      userEggFree = value;
+                    });
+                    saveToggleValues();
+                  },
+                ),
+                Container(
+                  width: screenSize.width * 0.8,
+                  child: Divider(
+                    color: Color(0xFF3dfbbd),
+                    height: 1,
+                    thickness: 1,
+                  ),),
+                SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Fish Free',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.fishFins, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
+                    ],),
+                  value: userFishFree,
+                  onChanged: (bool value) {
+                    setState(() {
+                      userFishFree = value;
+                    });
+                    saveToggleValues();
+                  },
+                ),
+                Container(
+                  width: screenSize.width * 0.8,
+                  child: Divider(
+                    color: Color(0xFF3dfbbd),
+                    height: 1,
+                    thickness: 1,
+                  ),),
+                SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Crustaceans Free',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.shrimp, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
+                    ],),
+                  value: userCrustaceansFree,
+                  onChanged: (bool value) {
+                    setState(() {
+                      userCrustaceansFree = value;
+                    });
+                    saveToggleValues();
+                  },
+                ),
+                Container(
+                  width: screenSize.width * 0.8,
+                  child: Divider(
+                    color: Color(0xFF3dfbbd),
+                    height: 1,
+                    thickness: 1,
+                  ),),
+                SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Dairy Free',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.cow, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
+                    ],),
+                  value: userDairyFree,
+                  onChanged: (bool value) {
+                    setState(() {
+                      userDairyFree = value;
+                    });
+                    saveToggleValues();
+                  },
+                ),
+                Container(
+                  width: screenSize.width * 0.8,
+                  child: Divider(
+                    color: Color(0xFF3dfbbd),
+                    height: 1,
+                    thickness: 1,
+                  ),),
+                SwitchListTile(
+                  activeColor: Color(int.parse('0xFF3dfbbd')),
+                  title: Row(
+                    children: [
+                      const Text(
+                        'Added Sugar Free',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      FaIcon(FontAwesomeIcons.cubesStacked, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
+                    ],),
+                  value: userAddedSugarFree,
+                  onChanged: (bool value) {
+                    setState(() {
+                      userAddedSugarFree= value;
                     });
                     saveToggleValues();
                   },
