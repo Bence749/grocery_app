@@ -44,9 +44,9 @@ class _HomePageState extends State<HomePage> {
   Future<void> loadToggleValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      toggle1 = prefs.getBool('toggle1') ?? false;
-      toggle2 = prefs.getBool('toggle2') ?? false;
-      toggle3 = prefs.getBool('toggle3') ?? false;
+      toggle1 = prefs.getBool('userVegan') ?? false;
+      toggle2 = prefs.getBool('userVegetarian') ?? false;
+      toggle3 = prefs.getBool('userHalal') ?? false;
     });
   }
 

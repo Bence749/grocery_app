@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:grocery_app/ProfilePage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:grocery_app/ProfilePage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
 
 import 'HomePage.dart';
 import 'ScanPage.dart';
@@ -20,11 +22,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
+  int _previousIndex = -1;
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if(index != _selectedIndex)
+      setState(() {
+        _previousIndex = _selectedIndex;
+        _selectedIndex = index;
+      });
   }
 
   @override
@@ -44,7 +49,7 @@ class _MyAppState extends State<MyApp> {
         800: Color(0xFF777375),
         900: Color(0xFF777375),
       })),
-      home: MainApp(_selectedIndex, _onItemTapped),
+      home: MainApp(_selectedIndex, _onItemTapped, _previousIndex),
     );
   }
 }
@@ -52,6 +57,7 @@ class _MyAppState extends State<MyApp> {
 class MainApp extends StatelessWidget {
   final int _selectedIndex;
   final Function(int) _onItemTapped;
+  final int _previousPage;
 
   final List<Widget> _pages = [
     const HomePage(),
@@ -60,11 +66,13 @@ class MainApp extends StatelessWidget {
     const ProfilePage()
   ];
 
-  MainApp(this._selectedIndex, this._onItemTapped, {super.key});
+  MainApp(this._selectedIndex, this._onItemTapped, this._previousPage, {super.key});
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     return Scaffold(
       body: _pages[_selectedIndex],
@@ -117,13 +125,15 @@ class MainApp extends StatelessWidget {
             },
           ),
         ],
-        leading: IconButton(
+        leading: _selectedIndex == 3 ? IconButton(
           icon: const Icon(
             CupertinoIcons.arrow_left,
             color: Colors.white, // Set the color to white
           ),
-          onPressed: () {},
-        ),
+          onPressed: () {
+            _onItemTapped(_previousPage);
+          },
+        ) : Container(),
       ),
     );
   }
