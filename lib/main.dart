@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Grocery App",
+      title: "GroceryScan",
       theme: ThemeData(
           primarySwatch: const MaterialColor(0xFF1b212f, {
         50: Color(0xFFE7E7E7),
@@ -62,8 +62,8 @@ class MainApp extends StatelessWidget {
   final List<Widget> _pages = [
     const HomePage(),
     const ScanPage(),
+    const ProfilePage(),
     const SettingsPage(),
-    const ProfilePage()
   ];
 
   MainApp(this._selectedIndex, this._onItemTapped, this._previousPage, {super.key});
@@ -84,7 +84,7 @@ class MainApp extends StatelessWidget {
               icon: const Icon(CupertinoIcons.barcode),
               title: const Text("Scan product")),
           SalomonBottomBarItem(
-              icon: const Icon(Icons.settings), title: const Text("Settings")),
+              icon: const Icon(CupertinoIcons.profile_circled), title: const Text("Profile")),
         ],
         backgroundColor: Color(int.parse('0xFF3dfbbd')),
         currentIndex: _selectedIndex,
@@ -116,7 +116,7 @@ class MainApp extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(
-              CupertinoIcons.profile_circled,
+              Icons.info_outline_rounded,
               size: 30,
             ),
             color: Color(int.parse('0xFF3dfbbd')),
