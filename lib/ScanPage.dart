@@ -30,9 +30,10 @@ class _ScanPageState extends State<ScanPage> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+    var theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: Color(int.parse('0xFF1b212f')),
+      backgroundColor: theme.colorScheme.background,
       body: Align(
         alignment: Alignment.center,
         child: Stack(
@@ -54,7 +55,7 @@ class _ScanPageState extends State<ScanPage> {
               left: 0,
               right: 0,
               child: Divider(
-                color: Color(0xFF39EBB1).withOpacity(0.5),
+                color: theme.colorScheme.primary.withOpacity(0.5),
                 thickness: 10,
               ),
             ),
@@ -66,8 +67,8 @@ class _ScanPageState extends State<ScanPage> {
                 height: 40,
                 decoration: BoxDecoration(
                   border: Border(
-                    top: BorderSide(width: 4.0, color: Colors.white),
-                    left: BorderSide(width: 4.0, color: Colors.white),
+                    top: BorderSide(width: 4.0, color: theme.colorScheme.secondary),
+                    left: BorderSide(width: 4.0, color: theme.colorScheme.secondary),
                   ),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20)),
@@ -82,8 +83,8 @@ class _ScanPageState extends State<ScanPage> {
                 height: 40,
                 decoration: BoxDecoration(
                   border: Border(
-                    top: BorderSide(width: 4.0, color: Colors.white),
-                    right: BorderSide(width: 4.0, color: Colors.white),
+                    top: BorderSide(width: 4.0, color: theme.colorScheme.secondary),
+                    right: BorderSide(width: 4.0, color: theme.colorScheme.secondary),
                   ),
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(20)),
@@ -98,8 +99,8 @@ class _ScanPageState extends State<ScanPage> {
                 height: 40,
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 4.0, color: Colors.white),
-                    left: BorderSide(width: 4.0, color: Colors.white),
+                    bottom: BorderSide(width: 4.0, color: theme.colorScheme.secondary),
+                    left: BorderSide(width: 4.0, color: theme.colorScheme.secondary),
                   ),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20)),
@@ -114,8 +115,8 @@ class _ScanPageState extends State<ScanPage> {
                 height: 40,
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 4.0, color: Colors.white),
-                    right: BorderSide(width: 4.0, color: Colors.white),
+                    bottom: BorderSide(width: 4.0, color: theme.colorScheme.secondary),
+                    right: BorderSide(width: 4.0, color: theme.colorScheme.secondary),
                   ),
                   borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(20)),
@@ -224,11 +225,12 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Color(int.parse('0xFF1b212f')),
+      backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Color(int.parse('0xFF1b212f')),
-        title: Text("Found Item", style: TextStyle(color: Colors.white),),
+        backgroundColor: theme.colorScheme.background,
+        title: Text("Found Item", style: TextStyle(color: theme.colorScheme.secondary),),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -237,7 +239,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
           },
           icon: Icon(
             CupertinoIcons.arrow_left,
-            color: Colors.white, // Set the color to white
+            color: theme.colorScheme.secondary, // Set the color to white
           ),
         ),
       ),
@@ -259,7 +261,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
               Text(
                 widget.product["name"],
                 style: TextStyle(
-                  color: Colors.white,
+                  color: theme.colorScheme.secondary,
                   fontSize: 20,
                 ),
               ),
@@ -269,9 +271,9 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("The product is ", style: TextStyle(color: Colors.white)),
+                  Text("The product is ", style: TextStyle(color: theme.colorScheme.secondary)),
                   Text(widget.isSafe == true ? "safe" : "unsafe", style: TextStyle(color: widget.isSafe == true ? Colors.green : Colors.red)),
-                  Text(" to consume", style: TextStyle(color: Colors.white)),
+                  Text(" to consume", style: TextStyle(color: theme.colorScheme.secondary)),
                   ],
               ),
               SizedBox(
@@ -281,26 +283,26 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                 children: [
                   AccordionSection(
                     headerBorderWidth: 2,
-                    headerBorderColor: Color(0xFF39EBB1),
-                    headerBackgroundColor: Color(0xFF1b212f),
-                    headerBackgroundColorOpened: Color(0xFF39EBB1),
-                    contentBackgroundColor: Color(0xFF1b212f),
-                    contentBorderColor: Color(0xFF39EBB1),
+                    headerBorderColor: theme.colorScheme.primary,
+                    headerBackgroundColor: theme.colorScheme.background,
+                    headerBackgroundColorOpened: theme.colorScheme.primary,
+                    contentBackgroundColor: theme.colorScheme.background,
+                    contentBorderColor: theme.colorScheme.primary,
                     contentBorderWidth: 2,
                     headerPadding: EdgeInsets.all(8),
-                    header:  Text("Ingredients", style: TextStyle(color: Colors.white)),
-                    content: Text(getIngredients(), style: TextStyle(color: Colors.white))
+                    header:  Text("Ingredients", style: TextStyle(color: theme.colorScheme.secondary)),
+                    content: Text(getIngredients(), style: TextStyle(color: theme.colorScheme.secondary))
                   ),
                   AccordionSection(
                     headerBorderWidth: 2,
-                    headerBorderColor: Color(0xFF39EBB1),
-                    headerBackgroundColor: Color(0xFF1b212f),
-                    headerBackgroundColorOpened: Color(0xFF39EBB1),
-                    contentBackgroundColor: Color(0xFF1b212f),
-                    contentBorderColor: Color(0xFF39EBB1),
+                    headerBorderColor: theme.colorScheme.primary,
+                    headerBackgroundColor: theme.colorScheme.background,
+                    headerBackgroundColorOpened: theme.colorScheme.primary,
+                    contentBackgroundColor: theme.colorScheme.background,
+                    contentBorderColor: theme.colorScheme.primary,
                     contentBorderWidth: 2,
                     headerPadding: EdgeInsets.all(8),
-                    header:  Text("Nutritional Information", style: TextStyle(color: Colors.white)),
+                    header:  Text("Nutritional Information", style: TextStyle(color: theme.colorScheme.secondary)),
                     content:
                     Table(
                       children: [
@@ -310,7 +312,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Vegan", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Vegan", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
@@ -327,7 +329,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Gluten", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Gluten", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
@@ -348,14 +350,14 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Dairy", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Dairy", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
                                       height: 10,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: widget.product["isDiaryFree"] == 1 ? Colors.green : Colors.red,
+                                        color: widget.product["isDairyFree"] == 1 ? Colors.green : Colors.red,
                                       ),
                                     )
                                   ],
@@ -365,7 +367,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Fish", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Fish", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
@@ -386,7 +388,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Vegetarian", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Vegetarian", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
@@ -403,7 +405,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Crustaceans", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Crustaceans", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
@@ -424,7 +426,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Egg", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Egg", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
@@ -441,7 +443,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Paleo", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Paleo", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,
@@ -462,7 +464,7 @@ class _FoundCodeScreenState extends State<FoundCodeScreen>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Added Sugar Free", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                    Text("Added Sugar Free", style: TextStyle(color: theme.colorScheme.secondary, fontSize: 14)),
                                     SizedBox(width: 8),
                                     Container(
                                       width: 10,

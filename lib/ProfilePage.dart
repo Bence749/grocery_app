@@ -4,8 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
+  ProfilePage({Key? key, required this.toggleTheme}) : super(key: key);
+  final VoidCallback toggleTheme;
+  
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -58,270 +59,355 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+    var theme = Theme.of(context);
+    bool _darkThemeEnabled = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: Color(int.parse('0xFF1b212f')),
+      backgroundColor: theme.colorScheme.background,
       body: Stack(
         children: [
           Container(
             alignment: Alignment.topCenter,
-            padding: EdgeInsets.only(top: 15),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
-                  child: Icon(
-                    CupertinoIcons.profile_circled,
-                    size: 100,
-                    color: Color(int.parse('0xFF3dfbbd')),
+            padding: EdgeInsets.fromLTRB(10,15,10,0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Icon(
+                      CupertinoIcons.profile_circled,
+                      size: 100,
+                      color: theme.colorScheme.primary,
+                    ),
                   ),
-                ),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                    child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Vegan',
-                        style: TextStyle(color: Colors.white),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Color mode',
+                          style: TextStyle(fontSize: 16.0, color: theme.colorScheme.secondary),
+                        ),
                       ),
-                      Spacer(
-                        flex: 1,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.background, // Color of the rectangle
+                          borderRadius: BorderRadius.circular(10.0), 
+                          border: Border.all(
+                            color: theme.colorScheme.secondary, // Color of the border
+                            width: 2.0, // Width of the border
+                          ),
+                        ),
+                        padding: EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Switch(
+                                value: _darkThemeEnabled,
+                                activeColor: theme.colorScheme.primary,
+                                inactiveTrackColor: theme.colorScheme.background,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _darkThemeEnabled = value;
+                                  });
+                                  widget.toggleTheme(); // Call the toggleTheme function passed from MainApp
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      FaIcon(FontAwesomeIcons.seedling, color: Color(int.parse('0xFF3dfbbd')), size: 25,)
-                    ],),
-                  value: userVegan,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userVegan = value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-                Container(
-                  width: screenSize.width * 0.8,
-                  child: Divider(
-                    color: Color(0xFF3dfbbd),
-                    height: 1,
-                    thickness: 1,
+                    ],
+                  ),
+
+                  ),
+
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                            'Vegan',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.seedling, color: theme.colorScheme.primary, size: 25,)
+                      ],),
+                    value: userVegan,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userVegan = value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                  Container(
+                    width: screenSize.width * 0.8,
+                    child: Divider(
+                      color: theme.colorScheme.primary,
+                      height: 1,
+                      thickness: 1,
+                    ),),
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,                    
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                            'Vegetarian',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.leaf, color: theme.colorScheme.primary, size: 25,)
+                      ],),
+                    value: userVegetarian,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userVegetarian = value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                  Container(
+                    width: screenSize.width * 0.8,
+                    child: Divider(
+                      color: theme.colorScheme.primary,
+                      height: 1,
+                      thickness: 1,
                   ),),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
-                    children: [
-                      const Text(
-                        'Vegetarian',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      FaIcon(FontAwesomeIcons.leaf, color: Color(int.parse('0xFF3dfbbd')), size: 25,)
-                    ],),
-                  value: userVegetarian,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userVegetarian = value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-                Container(
-                  width: screenSize.width * 0.8,
-                  child: Divider(
-                    color: Color(0xFF3dfbbd),
-                    height: 1,
-                    thickness: 1,
-                ),),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
-                    children: [
-                      const Text(
-                        'Paleo',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      FaIcon(FontAwesomeIcons.drumstickBite, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
-                    ],),
-                  value: userPaleo,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userPaleo = value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-                Container(
-                  width: screenSize.width * 0.8,
-                  child: Divider(
-                    color: Color(0xFF3dfbbd),
-                    height: 1,
-                    thickness: 1,
-                  ),),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
-                    children: [
-                      const Text(
-                        'Gluten Free',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      FaIcon(FontAwesomeIcons.breadSlice, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
-                    ],),
-                  value: userGlutenFree,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userGlutenFree = value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-                Container(
-                  width: screenSize.width * 0.8,
-                  child: Divider(
-                    color: Color(0xFF3dfbbd),
-                    height: 1,
-                    thickness: 1,
-                  ),),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
-                    children: [
-                      const Text(
-                        'Egg Free',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      FaIcon(FontAwesomeIcons.egg, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
-                    ],),
-                  value: userEggFree,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userEggFree = value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-                Container(
-                  width: screenSize.width * 0.8,
-                  child: Divider(
-                    color: Color(0xFF3dfbbd),
-                    height: 1,
-                    thickness: 1,
-                  ),),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
-                    children: [
-                      const Text(
-                        'Fish Free',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      FaIcon(FontAwesomeIcons.fishFins, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
-                    ],),
-                  value: userFishFree,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userFishFree = value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-                Container(
-                  width: screenSize.width * 0.8,
-                  child: Divider(
-                    color: Color(0xFF3dfbbd),
-                    height: 1,
-                    thickness: 1,
-                  ),),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
-                    children: [
-                      const Text(
-                        'Crustaceans Free',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      FaIcon(FontAwesomeIcons.shrimp, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
-                    ],),
-                  value: userCrustaceansFree,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userCrustaceansFree = value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-                Container(
-                  width: screenSize.width * 0.8,
-                  child: Divider(
-                    color: Color(0xFF3dfbbd),
-                    height: 1,
-                    thickness: 1,
-                  ),),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
-                    children: [
-                      const Text(
-                        'Dairy Free',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      FaIcon(FontAwesomeIcons.cow, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
-                    ],),
-                  value: userDairyFree,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userDairyFree = value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-                Container(
-                  width: screenSize.width * 0.8,
-                  child: Divider(
-                    color: Color(0xFF3dfbbd),
-                    height: 1,
-                    thickness: 1,
-                  ),),
-                SwitchListTile(
-                  activeColor: Color(int.parse('0xFF3dfbbd')),
-                  title: Row(
-                    children: [
-                      const Text(
-                        'Added Sugar Free',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      FaIcon(FontAwesomeIcons.cubesStacked, color: Color(int.parse('0xFF3dfbbd')), size: 20,)
-                    ],),
-                  value: userAddedSugarFree,
-                  onChanged: (bool value) {
-                    setState(() {
-                      userAddedSugarFree= value;
-                    });
-                    saveToggleValues();
-                  },
-                ),
-              ],
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                            'Paleo',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.drumstickBite, color: theme.colorScheme.primary, size: 20,)
+                      ],),
+                    value: userPaleo,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userPaleo = value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                  Container(
+                    width: screenSize.width * 0.8,
+                    child: Divider(
+                      color: theme.colorScheme.primary,
+                      height: 1,
+                      thickness: 1,
+                    ),),
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                            'Gluten Free',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.breadSlice, color: theme.colorScheme.primary, size: 20,)
+                      ],),
+                    value: userGlutenFree,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userGlutenFree = value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                  Container(
+                    width: screenSize.width * 0.8,
+                    child: Divider(
+                      color: theme.colorScheme.primary,
+                      height: 1,
+                      thickness: 1,
+                    ),),
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                            'Egg Free',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.egg, color: theme.colorScheme.primary, size: 20,)
+                      ],),
+                    value: userEggFree,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userEggFree = value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                  Container(
+                    width: screenSize.width * 0.8,
+                    child: Divider(
+                      color: theme.colorScheme.primary,
+                      height: 1,
+                      thickness: 1,
+                    ),),
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                            'Fish Free',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.fishFins, color: theme.colorScheme.primary, size: 20,)
+                      ],),
+                    value: userFishFree,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userFishFree = value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                  Container(
+                    width: screenSize.width * 0.8,
+                    child: Divider(
+                      color: theme.colorScheme.primary,
+                      height: 1,
+                      thickness: 1,
+                    ),),
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                          'Crustaceans Free',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.shrimp, color: theme.colorScheme.primary, size: 20,)
+                      ],),
+                    value: userCrustaceansFree,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userCrustaceansFree = value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                  Container(
+                    width: screenSize.width * 0.8,
+                    child: Divider(
+                      color: theme.colorScheme.primary,
+                      height: 1,
+                      thickness: 1,
+                    ),),
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                          'Dairy Free',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.cow, color: theme.colorScheme.primary, size: 20,)
+                      ],),
+                    value: userDairyFree,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userDairyFree = value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                  Container(
+                    width: screenSize.width * 0.8,
+                    child: Divider(
+                      color: theme.colorScheme.primary,
+                      height: 1,
+                      thickness: 1,
+                    ),),
+                  SwitchListTile(
+                    activeColor: theme.colorScheme.primary,
+                    inactiveTrackColor: theme.colorScheme.background,
+                    title: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0), // Adjust the right padding as needed
+                          child: Text(
+                          'Added Sugar Free',
+                            style: TextStyle(color: theme.colorScheme.secondary),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        FaIcon(FontAwesomeIcons.cubesStacked, color: theme.colorScheme.primary, size: 20,)
+                      ],),
+                    value: userAddedSugarFree,
+                    onChanged: (bool value) {
+                      setState(() {
+                        userAddedSugarFree= value;
+                      });
+                      saveToggleValues();
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],

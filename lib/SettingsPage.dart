@@ -22,28 +22,30 @@ class SettingsPage extends StatelessWidget {
         // Handle error gracefully, like showing a snackbar or logging.
       }
     }
-
+    
+    var theme = Theme.of(context);
+    
     return Scaffold(
-      backgroundColor: Color(int.parse('0xFF1b212f')),
+      backgroundColor: theme.colorScheme.background,
       body: Align(
         alignment: Alignment.center,
         child: Container(
           height: 130,
           decoration: BoxDecoration(
             border: Border.all(
-                color: Color(int.parse('0xFF39EBB1')),
+                color: theme.colorScheme.primary,
                 width: 2,
             ),
             borderRadius: BorderRadius.circular(10),
-            color: Color(int.parse('0xFF1b212f')),
+            color: theme.colorScheme.background,
           ),
           child: Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Column(
             children: [
-              Text("Send us feedback", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 30)),
+              Text("Send us feedback", textAlign: TextAlign.center, style: TextStyle(color: theme.colorScheme.secondary, fontSize: 30)),
               GestureDetector(
-                child: Text("hello@groceryapp.com", textAlign: TextAlign.center, style: TextStyle(color: Color(int.parse('0xFF39EBB1')), fontSize: 20)),
+                child: Text("hello@groceryapp.com", textAlign: TextAlign.center, style: TextStyle(color: theme.colorScheme.primary, fontSize: 20)),
                 onTap: () => _launchURL("hello@groceryapp.com", "Feedback")
               )
             ],
