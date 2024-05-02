@@ -6,7 +6,7 @@ brightness: Brightness.dark, // Set brightness to dark
 colorScheme: ColorScheme.dark(
   primary: Color(0xFF39EBB1), // Customize primary color
   secondary: Color(0xFFE7E7E7), 
-  background: Color(0xFF1b212f),// Customize secondary color
+  background: Color(0xFF1B212F),// Customize secondary color
   //shadow: Color(0xFF777375),
 ),
 textTheme: TextTheme(

@@ -4,9 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key, required this.toggleTheme}) : super(key: key);
-  final VoidCallback toggleTheme;
-  
+  const ProfilePage({Key? key}) : super(key: key);
+
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -60,7 +59,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     var theme = Theme.of(context);
-    bool _darkThemeEnabled = theme.brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: theme.colorScheme.background,
@@ -80,51 +78,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: theme.colorScheme.primary,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                    child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Color mode',
-                          style: TextStyle(fontSize: 16.0, color: theme.colorScheme.secondary),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.background, // Color of the rectangle
-                          borderRadius: BorderRadius.circular(10.0), 
-                          border: Border.all(
-                            color: theme.colorScheme.secondary, // Color of the border
-                            width: 2.0, // Width of the border
-                          ),
-                        ),
-                        padding: EdgeInsets.all(10.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Switch(
-                                value: _darkThemeEnabled,
-                                activeColor: theme.colorScheme.primary,
-                                inactiveTrackColor: theme.colorScheme.background,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _darkThemeEnabled = value;
-                                  });
-                                  widget.toggleTheme(); // Call the toggleTheme function passed from MainApp
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  ),
-
                   SwitchListTile(
                     activeColor: theme.colorScheme.primary,
                     inactiveTrackColor: theme.colorScheme.background,

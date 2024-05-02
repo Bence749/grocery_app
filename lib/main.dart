@@ -23,7 +23,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   int _previousIndex = -1;
-  ThemeMode _themeMode = ThemeMode.light;
+  ThemeMode _themeMode = ThemeMode.dark;
 
   void _onItemTapped(int index) {
     if(index != _selectedIndex)
@@ -69,8 +69,8 @@ class MainApp extends StatelessWidget {
     final List<Widget> _pages = [
       const HomePage(),
       const ScanPage(),
-      ProfilePage(toggleTheme: toggleTheme),
-      const SettingsPage(),
+      const ProfilePage(),
+      SettingsPage(toggleTheme: toggleTheme),
     ];
 
     return Scaffold(

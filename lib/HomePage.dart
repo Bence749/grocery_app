@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0,200,0,0),
+              padding: EdgeInsets.fromLTRB(0,180,0,0),
               child: Image.asset((theme.brightness == Brightness.dark) 
               ? 'assets/images/grocery_logo.jpg'
               : 'assets/images/GroceryScan.png',
