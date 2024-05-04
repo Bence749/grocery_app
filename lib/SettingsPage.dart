@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 
@@ -47,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Center(
                   child: SizedBox(
-                    width: screenSize.width * 0.6,
+                    width: screenSize.width * 0.8,
                     child: Container(
                       height: 130,
                       decoration: BoxDecoration(
@@ -82,7 +81,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Center(
                   child: SizedBox(
-                    width: screenSize.width * 0.6,
+                    width: screenSize.width * 0.8,
                     child: Container(
                       height: 130,
                       decoration: BoxDecoration(
@@ -94,7 +93,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         color: theme.colorScheme.background,
                       ),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                        padding: EdgeInsets.fromLTRB(20, 20, 20, 15),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
