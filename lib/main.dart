@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grocery_app/ProfilePage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-
+import 'themes/themes.dart';
 
 import 'HomePage.dart';
 import 'ScanPage.dart';
@@ -23,6 +23,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   int _previousIndex = -1;
+  ThemeMode _themeMode = ThemeMode.dark;
 
   void _onItemTapped(int index) {
     if(index != _selectedIndex)
@@ -31,25 +32,21 @@ class _MyAppState extends State<MyApp> {
         _selectedIndex = index;
       });
   }
+  
+  void toggleTheme() {
+    setState(() {
+      _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "GroceryScan",
-      theme: ThemeData(
-          primarySwatch: const MaterialColor(0xFF1b212f, {
-        50: Color(0xFFE7E7E7),
-        100: Color(0xFFE7E7E7),
-        200: Color(0xFFE7E7E7),
-        300: Color(0xFFE7E7E7),
-        400: Color(0xFFE7E7E7),
-        500: Color(0xFF1b212f), // Main color
-        600: Color(0xFF39EBB1), // Secondary color
-        700: Color(0xFF777375),
-        800: Color(0xFF777375),
-        900: Color(0xFF777375),
-      })),
-      home: MainApp(_selectedIndex, _onItemTapped, _previousIndex),
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: _themeMode,
+      home: MainApp(_selectedIndex, _onItemTapped, _previousIndex, toggleTheme: toggleTheme),
     );
   }
 }
@@ -58,21 +55,23 @@ class MainApp extends StatelessWidget {
   final int _selectedIndex;
   final Function(int) _onItemTapped;
   final int _previousPage;
+  final VoidCallback toggleTheme;
 
-  final List<Widget> _pages = [
-    const HomePage(),
-    const ScanPage(),
-    const ProfilePage(),
-    const SettingsPage(),
-  ];
-
-  MainApp(this._selectedIndex, this._onItemTapped, this._previousPage, {super.key});
+  MainApp(this._selectedIndex, this._onItemTapped, this._previousPage, {super.key, required this.toggleTheme});
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+    var theme = Theme.of(context);
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  
+    final List<Widget> _pages = [
+      const HomePage(),
+      const ScanPage(),
+      const ProfilePage(),
+      SettingsPage(toggleTheme: toggleTheme),
+    ];
 
     return Scaffold(
       body: _pages[_selectedIndex],
@@ -86,29 +85,30 @@ class MainApp extends StatelessWidget {
           SalomonBottomBarItem(
               icon: const Icon(CupertinoIcons.profile_circled), title: const Text("Profile")),
         ],
-        backgroundColor: Color(int.parse('0xFF3dfbbd')),
+        backgroundColor: theme.colorScheme.primary,
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(int.parse('0xFF161a1f')),
+        selectedItemColor: theme.colorScheme.background,
+        unselectedItemColor: theme.colorScheme.background,
         onTap: _onItemTapped,
         margin: EdgeInsets.fromLTRB(
             screenSize.width * 0.10, 0, screenSize.width * 0.10, 0),
       ),
       appBar: AppBar(
-        backgroundColor: Color(int.parse('0xFF1b212f')),
+        backgroundColor: theme.colorScheme.background,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Text(
               'Grocery',
               style: TextStyle(
-                color: Colors.white, // Color for the first part
+                color: theme.colorScheme.secondary, // Color for the first part
               ),
             ),
             Text(
               'Scan', // Add space before the second part
               style: TextStyle(
                 color:
-                    Color(int.parse('0xFF3dfbbd')), // Color for the second part
+                    theme.colorScheme.primary // Color for the second part
               ),
             ),
           ],
@@ -119,16 +119,16 @@ class MainApp extends StatelessWidget {
               Icons.info_outline_rounded,
               size: 30,
             ),
-            color: Color(int.parse('0xFF3dfbbd')),
+            color: theme.colorScheme.primary,
             onPressed: () {
               _onItemTapped(3);
             },
           ),
         ],
         leading: _selectedIndex == 3 ? IconButton(
-          icon: const Icon(
+          icon: Icon(
             CupertinoIcons.arrow_left,
-            color: Colors.white, // Set the color to white
+            color: theme.colorScheme.secondary, // Set the color to white
           ),
           onPressed: () {
             _onItemTapped(_previousPage);
@@ -141,6 +141,7 @@ class MainApp extends StatelessWidget {
           onPressed: () {},
         ) : Container(),
       ),
+      
     );
   }
 }
