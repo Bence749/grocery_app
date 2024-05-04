@@ -133,6 +133,12 @@ class MainApp extends StatelessWidget {
           onPressed: () {
             _onItemTapped(_previousPage);
           },
+        ) : _selectedIndex == 1 ? IconButton(
+          icon: const Icon(
+            Icons.history,
+            color: Colors.white, // Set the color to white
+          ),
+          onPressed: () {},
         ) : Container(),
       ),
     );
