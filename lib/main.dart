@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:grocery_app/ProfilePage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'themes/themes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'HomePage.dart';
 import 'ScanPage.dart';
@@ -24,6 +25,19 @@ class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   int _previousIndex = -1;
   ThemeMode _themeMode = ThemeMode.dark;
+
+  @override
+  void initState() {
+    super.initState();
+    loadToggleValues();
+  }
+
+  Future<void> loadToggleValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _themeMode = (prefs.getBool('userDarkMode') ?? true) ? ThemeMode.dark : ThemeMode.light;
+    });
+  }
 
   void _onItemTapped(int index) {
     if(index != _selectedIndex)
